@@ -35,7 +35,7 @@ btns.addEventListener('click', (e) => {
     sTimer.timerUpdates();
     sTimer.start();
   } else if (btn.id === 'editTime') {
-    
+    alert('In Progress ');
   }
 });
 
