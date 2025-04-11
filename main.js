@@ -1,8 +1,7 @@
 // func == function
 // str == String
-// amnt == amount
 
-// padStart(targetLength, padString) pads the current string with another string (repeated) until it reaches the target length.
+// padStart(targetLength, padString) pads the current str with another str (repeated) until it reaches the target length.
 
 // func 'setInterval(func, ms)' refreshes a func according to your ms (Milliseconds)... if you store it in a var you can stop it too (using clearInterval(var)) use var not the function
 
@@ -21,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btns = document.getElementById('btns');
   const editPopup = document.getElementById('editPopup');
   
+  
   if (!min || !sec || !ms10 || !btns) {
     return;
   }
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerTrack = null;
   
   btns.addEventListener('click', (e) => {
+    const startBtn = document.getElementById('start');
     let btn = e.target.closest('.btn');
     if (!btn) return;
     
@@ -40,20 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
         sTimer.start();
         btn.innerHTML = "<i class='bx bx-stop' ></i>"
       }
-    } else if (btn.id === 'stop') {
-      if (timerTrack !== null) {
-        clearInterval(timerTrack)
-        timerTrack = null;
-      } else {
-        console.log('Timer has already Stopped...')
-      }
-    }
-    else if (btn.id === 'restart') {
+    } else if (btn.id === 'restart') {
       clearInterval(timerTrack)
       timerTrack = null;
       sTimer.mins = sTimer.secs = sTimer.mss = 0;
       sTimer.timerUpdates();
       sTimer.start();
+     startBtn.innerHTML = "<i class='bx bx-stop' ></i>";
     } else if (btn.id === 'editTime') {
       timeEditor.editMode();
     }
