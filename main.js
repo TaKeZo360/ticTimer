@@ -1,68 +1,109 @@
-console.log('Welcome To TicTimer');
+// func == function
+// str == String
+// amnt == amount
 
+// padStart(targetLength, padString) pads the current string with another string (repeated) until it reaches the target length.
 
-let min = document.getElementById('min');
-let sec = document.getElementById('sec');
-let ms10 = document.getElementById('ms');
-let btns = document.getElementById('btns');
+// func 'setInterval(func, ms)' refreshes a func according to your ms (Milliseconds)... if you store it in a var you can stop it too (using clearInterval(var)) use var not the function
 
-let mins = 0;
-let secs = 0;
-let mss = 0;
-let timerTrack = null;
-
-btns.addEventListener('click', (e) => {
-  let btn = e.target.closest('.btn');
-  if (!btn) return;
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.querySelector('.loadBar').style.display = 'none';
+  }, 3000);
   
-  if (btn.id === 'start') {
-    if (timerTrack !== null) {
-      console.log('Timer Has Already Started')
+  
+  console.log('Welcome To TicTimer...');
+  
+  
+  const min = document.getElementById('min');
+  const sec = document.getElementById('sec');
+  const ms10 = document.getElementById('ms');
+  const btns = document.getElementById('btns');
+  const editPopup = document.getElementById('editPopup');
+  
+  if (!min || !sec || !ms10 || !btns) {
+    return;
+  }
+  
+  let timerTrack = null;
+  
+  btns.addEventListener('click', (e) => {
+    let btn = e.target.closest('.btn');
+    if (!btn) return;
+    
+    if (btn.id === 'start') {
+      if (timerTrack !== null) {
+        clearInterval(timerTrack)
+        timerTrack = null;
+        btn.innerHTML = "<i class='bx bx-play'></i>"
+      } else {
+        sTimer.start();
+        btn.innerHTML = "<i class='bx bx-stop' ></i>"
+      }
+    } else if (btn.id === 'stop') {
+      if (timerTrack !== null) {
+        clearInterval(timerTrack)
+        timerTrack = null;
+      } else {
+        console.log('Timer has already Stopped...')
+      }
     }
-    sTimer.start();
-  } else if (btn.id === 'stop') {
-    if (timerTrack !== null) {
+    else if (btn.id === 'restart') {
       clearInterval(timerTrack)
       timerTrack = null;
-    } else {
-      console.log('Timer has already Stopped')
+      sTimer.mins = sTimer.secs = sTimer.mss = 0;
+      sTimer.timerUpdates();
+      sTimer.start();
+    } else if (btn.id === 'editTime') {
+      timeEditor.editMode();
     }
+  });
+  
+  let sTimer = {
+    mins: 0,
+    secs: 0,
+    mss: 0,
+    //Starts The Timer
+    start: function() {
+      timerTrack = setInterval(() => {
+        this.timerTimes();
+      }, 10);
+    },
+    // Time Logics
+    timerTimes: function() {
+      this.mss += 1;
+      
+      if (this.mss === 100) {
+        this.mss = 0;
+        this.secs++;
+      }
+      if (this.secs === 60) {
+        this.secs = 0;
+        this.mins++;
+      }
+      if (this.mins === 60) {
+        this.mins = this.secs = this.mss = 0;
+        clearInterval(timerTrack);
+        timerTrack = null
+        console.log('Max Number Limit Reached...')
+      }
+      this.timerUpdates()
+    },
+    // Updates Html
+    timerUpdates: function() {
+      ms10.textContent = String(this.mss).padStart(2, '0');
+      sec.textContent = String(this.secs).padStart(2, '0');
+      min.textContent = String(this.mins).padStart(2, '0');
+    },
   }
-  else if (btn.id === 'restart') {
-    clearInterval(timerTrack)
-    timerTrack = null;
-    mins = secs = mss = 0;
-    sTimer.timerUpdates();
-    sTimer.start();
-  } else if (btn.id === 'editTime') {
-    alert('In Progress ');
+  // A Section To Edit Some Func
+  let timeEditor = {
+    editMode: function() {
+      editPopup.classList.toggle('active');
+    },
   }
+  
+  document.querySelector('.cancelBtn').addEventListener('click', () => {
+    editPopup.classList.remove('active')
+  });
 });
-
-let sTimer = {
-  start: function() {
-    timerTrack = setInterval(() => {
-      this.timerTimes();
-    }, 10);
-  },
-  
-  timerTimes: function() {
-    mss += 1;
-    
-    if (mss === 100) {
-      mss = 0;
-      secs++;
-    }
-    if (secs === 60) {
-      secs = 0;
-      mins++;
-    }
-    this.timerUpdates()
-  },
-  
-  timerUpdates: function() {
-    ms10.textContent = String(mss).padStart(2, '0');
-    sec.textContent = String(secs).padStart(2, '0');
-    min.textContent = String(mins).padStart(2, '0');
-  },
-}
