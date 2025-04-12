@@ -158,8 +158,8 @@ body {
 
 /* Edit popUp Styles */
 #editPopup {
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   position: fixed;
   z-index: 60;
   background: var(--bg-color);
@@ -168,14 +168,21 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-radius: 20px;
-  transform: scale(0);
+  border-radius: 30px;
+  transform: translateY(20px) scale(.90);
+  pointer-events: none;
+  box-shadow:
+    inset -3px -3px 5px black,
+    inset 2px 2px 3px white,
+    2px 2px 5px black;
+  z-index: 50;
   opacity: 0;
   transition: transform .5s ease, opacity .5s ease;
 }
 
 #editPopup.active {
-  transform: scale(1);
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
   opacity: 1;
 }
 

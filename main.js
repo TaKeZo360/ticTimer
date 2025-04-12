@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ms10 = document.getElementById('ms');
   const btns = document.getElementById('btns');
   const editPopup = document.getElementById('editPopup');
+  const startBtn = document.getElementById('start');
   
   
   if (!min || !sec || !ms10 || !btns || !editPopup) {
@@ -39,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
   btns.addEventListener('click', (e) => {
     let btn = e.target.closest('.btn');
     if (!btn) return;
-    
-    let startBtn = document.getElementById('start');
     
     switch (btn.id) {
       case 'start':
@@ -79,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mss: 0,
     //Starts The Timer
     start: function() {
-      
+      // Updates timerTimes Every 10ms
       timerTrack = setInterval(() => {
         this.timerTimes();
       }, 10);
@@ -106,21 +105,21 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(" There's a problem, numbers can't be less then 0");
       }
       //Updates Sec if ms is 100 (10ms × 100 = 1s)
-      if (this.mss === 100) {
+      if (this.mss > 99) {
         this.mss = 0;
         this.secs++;
       }
       // Updates Min if Sec is 60
-      if (this.secs === 60) {
+      if (this.secs > 59) {
         this.secs = 0;
         this.mins++;
       }
-      if (this.mins === 60 && this.secs === 0 && this.mss === 0) {
+      if (this.mins >= 60) {
         clearInterval(timerTrack);
-        timerTrack = null
-        console.log('Max Number Limit Reached...')
+        timerTrack = null;
+        console.log('Max Number Limit Reached...');
       }
-      this.timerUpdates()
+      this.timerUpdates();
     },
     // Updates Html
     timerUpdates: function() {
