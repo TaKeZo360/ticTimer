@@ -86,6 +86,9 @@ body {
   z-index: 50;
   transform: translateY(90px);
   opacity: 0;
+}
+
+.wrapper.aniActive {
   animation: onStartSlide 1.7s ease 3s forwards;
 }
 

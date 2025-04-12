@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       loadBar.style.display = 'none';
     }, 500);
   }, 3000);
+  document.querySelector('.wrapper').classList.add('aniActive');
   
   console.log('Welcome To TicTimer...');
   
@@ -28,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const editPopup = document.getElementById('editPopup');
   
   
-  if (!min || !sec || !ms10 || !btns) {
+  if (!min || !sec || !ms10 || !btns || !editPopup) {
     return;
   }
   
   let timerTrack = null;
-  let isTimeStarted = false;
+  let isTimerStarted = false;
   
   btns.addEventListener('click', (e) => {
     let btn = e.target.closest('.btn');
@@ -49,15 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           sTimer.start();
           btn.innerHTML = "<i class='bx bx-stop' ></i>";
-          isTimeStarted = true
+          isTimerStarted = true
         }
         break;
         
       case 'restart':
-        if (isTimeStarted) {
+        if (isTimerStarted) {
           sTimer.restart();
           startBtn.innerHTML = "<i class='bx bx-play'></i>";
-          isTimeStarted = false;
+          isTimerStarted = false;
         } else {
           console.log('Start Time Timer First...')
         }

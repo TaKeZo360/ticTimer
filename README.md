@@ -17,3 +17,4 @@
 - Update 1.5.0: Removed A Saprate Button To Stop And Some Quality Upgrades
 - Update 1.5.2: Fixed Some Bug and Made The Code Shorter
 - Update 1.6.0: Upgraded The Ui And Added Some Options..
+- Update 1.6.1: Bug Fix...Fixed Some Animetion Bugs...
