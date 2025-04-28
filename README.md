@@ -2,6 +2,9 @@
 
 - A Beginner Level Frontend Project.
 - This is a simple and responsive Timer application built using HTML, CSS, and JavaScript. It allows users to start, pause, and reset a countdown or stopwatch with ease. The timer is general time tracking with time limit.
+- 
+- I Stopped Working On It Because it's Logics are worse but i might Start again because in the end it is an
+"Beginner Level Frontend Project"
 
 
 ## Features
